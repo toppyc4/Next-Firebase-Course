@@ -28,8 +28,8 @@ export default function AdminPostPage(props) {
     <main>
       <Metatags title='admin page' />
       <AuthCheck>
-        <PostList />
         <CreateNewPost />
+        <PostList />
       </AuthCheck>
     </main>
   )
@@ -37,7 +37,7 @@ export default function AdminPostPage(props) {
 
 function PostList() {
   const ref = collection(getFirestore(), "users", auth.currentUser.uid, "posts")
-  const postsQuery = query(ref, orderBy("createdAt"))
+  const postsQuery = query(ref, orderBy("createdAt", "desc"))
   const [querySnapshot] = useCollection(postsQuery)
 
   const posts = querySnapshot?.docs.map((doc) => doc.data())
@@ -88,19 +88,22 @@ function CreateNewPost() {
   }
 
   return (
-    <form onSubmit={createPost}>
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder='My Awesome Article!'
-        className={styles.input}
-      />
-      <p>
-        <strong>Slug:</strong> {slug}
-      </p>
-      <button type='submit' disabled={!isValid} className='btn-green'>
-        Create New Post
-      </button>
-    </form>
+    <div className={styles.createNewPostDiv}>
+      <h1>Create new Post</h1>
+      <form onSubmit={createPost}>
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder='My Awesome Article!'
+          className={styles.input}
+        />
+        <p>
+          <strong>Slug:</strong> {slug}
+        </p>
+        <button type='submit' disabled={!isValid} className='btn-green'>
+          Create New Post
+        </button>
+      </form>
+    </div>
   )
 }

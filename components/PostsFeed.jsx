@@ -15,16 +15,29 @@ function PostItem({ post, admin = false }) {
 
   return (
     <div className='card'>
-      <Link href={`/${post.username}`}>
-        <a>
-          <strong>By @{post.username}</strong>
-        </a>
-      </Link>
-      <Link href={`/${post.username}/${post.slug}`}>
-        <h2>
-          <a>{post.title}</a>
-        </h2>
-      </Link>
+      <header>
+        <div>
+          <Link href={`/${post.username}`}>
+            <a>
+              <strong>By @{post.username}</strong>
+            </a>
+          </Link>
+
+          <Link href={`/${post.username}/${post.slug}`}>
+            <h2>
+              <a>{post.title}</a>
+            </h2>
+          </Link>
+        </div>
+        {/* if admin view, show extra controls for user */}
+        {admin && (
+          <div className='push-left'>
+            <Link href={`/admin/${post.slug}`}>
+              <button className='btn-blue'>Edit</button>
+            </Link>
+          </div>
+        )}
+      </header>
 
       <footer>
         <span>
@@ -32,16 +45,6 @@ function PostItem({ post, admin = false }) {
         </span>
         <span className='push-left'>💗{post.heartCount || 0} Hearts</span>
       </footer>
-      {/* if admin view, show extra controls for user */}
-      {admin && (
-        <>
-          <Link href={`/admin/${post.slug}`}>
-            <h3>
-              <button className='btn-blue'>Edit</button>
-            </h3>
-          </Link>
-        </>
-      )}
     </div>
   )
 }

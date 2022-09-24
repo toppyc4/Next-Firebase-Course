@@ -177,6 +177,11 @@ button.btn-logo {
   border-radius: 8px;
 }
 
+.card header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .card footer {
   display: flex;
 }

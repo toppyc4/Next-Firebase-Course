@@ -70,6 +70,7 @@ export default function Home(props) {
 
   return (
     <main>
+      <h1>- HOME PAGE -</h1>
       <PostsFeed posts={posts} />
       {!loading && !postsEnd && (
         <button onClick={getMorePosts}>Load more</button>

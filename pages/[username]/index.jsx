@@ -26,7 +26,6 @@ export async function getServerSideProps({ query: urlQuery }) {
   let posts = null
 
   if (userDoc) {
-    console.log(userDoc)
     user = userDoc.data()
     // const postsQuery = userDoc.ref
     //   .collection("post")
